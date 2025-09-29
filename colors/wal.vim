@@ -62,7 +62,14 @@ function! s:hi(group, guifg, guibg, attr)
 endfunction
 
 " UI Elements
-call s:hi('Normal', s:fg, s:bg, '')
+" Check if transparency is desired (set g:wal_transparent = 1 for transparent bg)
+if get(g:, 'wal_transparent', 0)
+  call s:hi('Normal', s:fg, 'NONE', '')
+  call s:hi('NormalNC', s:fg, 'NONE', '')
+else
+  call s:hi('Normal', s:fg, s:bg, '')
+  call s:hi('NormalNC', s:fg, s:bg, '')
+endif
 call s:hi('Cursor', s:bg, s:cursor, '')
 call s:hi('CursorLine', '', s:color0, '')
 call s:hi('CursorColumn', '', s:color0, '')
@@ -179,3 +186,4 @@ call s:hi('TelescopeBorder', s:color8, s:color0, '')
 call s:hi('WhichKeyFloat', s:fg, s:color0, '')
 call s:hi('NeoTreeNormal', s:fg, s:color0, '')
 call s:hi('NeoTreeNormalNC', s:fg, s:color0, '')
+

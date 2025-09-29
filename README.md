@@ -156,6 +156,7 @@ The colorscheme works out of the box with sensible defaults, but you can customi
 require("wal").setup({
   auto_reload = true,    -- Automatically reload when pywal colors change (default: true)
   notification = true,   -- Show notification when colors are reloaded (default: true)
+  transparent = false,   -- Use transparent background (default: false)
 })
 ```
 
@@ -165,6 +166,7 @@ require("wal").setup({
 |--------|------|---------|-------------|
 | `auto_reload` | `boolean` | `true` | Automatically reload colorscheme when pywal cache changes |
 | `notification` | `boolean` | `true` | Show notifications when colors are automatically reloaded |
+| `transparent` | `boolean` | `false` | Use transparent background instead of wal's background color |
 
 ### Disabling Auto-reload
 
@@ -175,6 +177,18 @@ require("wal").setup({
   auto_reload = false,
 })
 ```
+
+### Using Transparent Background
+
+To fix background color mismatches with LazyVim or use terminal transparency:
+
+```lua
+require("wal").setup({
+  transparent = true,  -- Use terminal background instead of wal's background
+})
+```
+
+This is especially useful if you experience dark background issues when wal colors change.
 
 ### Advanced Usage
 
