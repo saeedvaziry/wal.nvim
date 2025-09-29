@@ -39,6 +39,12 @@ end
 function M.setup(opts)
   opts = opts or {}
 
+  -- Store configuration
+  M.config = vim.tbl_deep_extend('force', {
+    auto_reload = true, -- Enable auto-reload by default
+    notification = true, -- Show notifications when colors change
+  }, opts)
+
   -- Apply the colorscheme
   vim.cmd('colorscheme wal')
 end

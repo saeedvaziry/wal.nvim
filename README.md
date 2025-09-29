@@ -5,7 +5,8 @@ A Neovim colorscheme that automatically adapts to your [pywal](https://github.co
 ## ✨ Features
 
 - 🎨 **Automatic color sync** - Uses colors from `~/.cache/wal/colors-wal.vim`
-- 🔄 **Real-time updates** - Changes when you generate new pywal colors
+- 🔄 **Real-time auto-reload** - Automatically updates when you run `wal` with new wallpapers
+- ⚡ **Instant feedback** - Shows notifications when colors change
 - 🌙 **LazyVim ready** - Seamless integration with LazyVim
 - 🎯 **Complete coverage** - Full syntax highlighting, LSP diagnostics, and Tree-sitter support
 - 📁 **Plugin compatibility** - Works with Telescope, Neo-tree, and other popular plugins
@@ -99,16 +100,30 @@ require("wal").setup()
 
 ### Reloading colors
 
-After generating new colors with pywal, reload the colorscheme:
+The colorscheme **automatically reloads** when you generate new colors with pywal! 🎉
+
+Just run:
+```bash
+wal -i /path/to/new/wallpaper
+```
+
+And LazyVim will instantly update with your new colors and show a notification.
+
+#### Manual reload
+
+You can also manually reload if needed:
 
 **Vim command:**
+```vim
+:WalReload
+```
 
+**Or:**
 ```vim
 :colorscheme wal
 ```
 
 **Lua:**
-
 ```lua
 require("wal").reload()
 ```
@@ -135,9 +150,29 @@ The colorscheme uses your pywal colors as follows:
 
 ### Basic Configuration
 
+The colorscheme works out of the box with sensible defaults, but you can customize its behavior:
+
 ```lua
 require("wal").setup({
-  -- Configuration options will be added in future versions
+  auto_reload = true,    -- Automatically reload when pywal colors change (default: true)
+  notification = true,   -- Show notification when colors are reloaded (default: true)
+})
+```
+
+### Configuration Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `auto_reload` | `boolean` | `true` | Automatically reload colorscheme when pywal cache changes |
+| `notification` | `boolean` | `true` | Show notifications when colors are automatically reloaded |
+
+### Disabling Auto-reload
+
+If you prefer to manually reload colors:
+
+```lua
+require("wal").setup({
+  auto_reload = false,
 })
 ```
 
