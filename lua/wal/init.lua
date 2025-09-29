@@ -43,7 +43,7 @@ function M.setup(opts)
   M.config = vim.tbl_deep_extend('force', {
     auto_reload = true, -- Enable auto-reload by default
     notification = true, -- Show notifications when colors change
-    transparent = false, -- Use transparent background
+    transparent = true, -- Use transparent background by default
   }, opts)
 
   -- Set global variable for the colorscheme to read
