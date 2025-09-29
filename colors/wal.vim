@@ -97,9 +97,14 @@ call s:hi('FoldColumn', s:color8, '', '')
 call s:hi('ColorColumn', '', s:color0, '')
 
 " Popup menu
-call s:hi('Pmenu', s:fg, s:color0, '')
+if get(g:, 'wal_transparent', 0)
+  call s:hi('Pmenu', s:fg, 'NONE', '')
+  call s:hi('PmenuSbar', '', 'NONE', '')
+else
+  call s:hi('Pmenu', s:fg, s:color0, '')
+  call s:hi('PmenuSbar', '', s:color8, '')
+endif
 call s:hi('PmenuSel', s:bg, s:color4, 'bold')
-call s:hi('PmenuSbar', '', s:color8, '')
 call s:hi('PmenuThumb', '', s:color4, '')
 
 " Tabs
@@ -179,11 +184,22 @@ call s:hi('@variable', s:fg, '', '')
 call s:hi('@parameter', s:fg, '', '')
 
 " Additional LazyVim specific highlights
-call s:hi('NormalFloat', s:fg, s:color0, '')
-call s:hi('FloatBorder', s:color8, s:color0, '')
-call s:hi('TelescopeNormal', s:fg, s:color0, '')
-call s:hi('TelescopeBorder', s:color8, s:color0, '')
-call s:hi('WhichKeyFloat', s:fg, s:color0, '')
-call s:hi('NeoTreeNormal', s:fg, s:color0, '')
-call s:hi('NeoTreeNormalNC', s:fg, s:color0, '')
+" Use transparency setting for floating windows and panels
+if get(g:, 'wal_transparent', 0)
+  call s:hi('NormalFloat', s:fg, 'NONE', '')
+  call s:hi('FloatBorder', s:color8, 'NONE', '')
+  call s:hi('TelescopeNormal', s:fg, 'NONE', '')
+  call s:hi('TelescopeBorder', s:color8, 'NONE', '')
+  call s:hi('WhichKeyFloat', s:fg, 'NONE', '')
+  call s:hi('NeoTreeNormal', s:fg, 'NONE', '')
+  call s:hi('NeoTreeNormalNC', s:fg, 'NONE', '')
+else
+  call s:hi('NormalFloat', s:fg, s:color0, '')
+  call s:hi('FloatBorder', s:color8, s:color0, '')
+  call s:hi('TelescopeNormal', s:fg, s:color0, '')
+  call s:hi('TelescopeBorder', s:color8, s:color0, '')
+  call s:hi('WhichKeyFloat', s:fg, s:color0, '')
+  call s:hi('NeoTreeNormal', s:fg, s:color0, '')
+  call s:hi('NeoTreeNormalNC', s:fg, s:color0, '')
+endif
 
