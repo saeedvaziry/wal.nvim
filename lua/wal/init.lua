@@ -44,13 +44,20 @@ function M.setup(opts)
     auto_reload = true, -- Enable auto-reload by default
     notification = true, -- Show notifications when colors change
     transparent = true, -- Use transparent background by default
+    use_terminal_colors = false, -- Use terminal ANSI colors for terminals
   }, opts)
 
-  -- Set global variable for the colorscheme to read
+  -- Set global variables for the colorscheme to read
   vim.g.wal_transparent = M.config.transparent and 1 or 0
+  vim.g.wal_use_terminal_colors = M.config.use_terminal_colors and 1 or 0
 
   -- Apply the colorscheme
   vim.cmd('colorscheme wal')
+
+  -- Setup lazygit integration if using terminal colors
+  if M.config.use_terminal_colors then
+    require('wal.lazygit').setup()
+  end
 end
 
 -- Function to get colors for other plugins

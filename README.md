@@ -154,9 +154,10 @@ The colorscheme works out of the box with sensible defaults, but you can customi
 
 ```lua
 require("wal").setup({
-  auto_reload = true,    -- Automatically reload when pywal colors change (default: true)
-  notification = true,   -- Show notification when colors are reloaded (default: true)
-  transparent = true,    -- Use transparent background (default: true)
+  auto_reload = true,           -- Automatically reload when pywal colors change (default: true)
+  notification = true,          -- Show notification when colors are reloaded (default: true)
+  transparent = true,           -- Use transparent background (default: true)
+  use_terminal_colors = false,  -- Use terminal ANSI colors instead of pywal hex colors (default: false)
 })
 ```
 
@@ -167,6 +168,7 @@ require("wal").setup({
 | `auto_reload` | `boolean` | `true` | Automatically reload colorscheme when pywal cache changes |
 | `notification` | `boolean` | `true` | Show notifications when colors are automatically reloaded |
 | `transparent` | `boolean` | `true` | Use transparent background instead of wal's background color |
+| `use_terminal_colors` | `boolean` | `false` | Use terminal ANSI colors (0-15) instead of pywal hex colors |
 
 ### Disabling Auto-reload
 
@@ -187,6 +189,32 @@ require("wal").setup({
   transparent = false,  -- Use wal's background color instead of terminal background
 })
 ```
+
+### Using Terminal Colors Mode
+
+For better compatibility with terminal applications like lazygit, you can enable terminal colors mode. This disables `termguicolors` and uses ANSI color indices (0-15) instead of hex colors, allowing terminal applications to use your terminal emulator's actual color palette:
+
+```lua
+require("wal").setup({
+  use_terminal_colors = true,
+})
+```
+
+**Note**: When using terminal colors mode with LazyVim and lazygit, you should also disable snacks.nvim's lazygit theme integration:
+
+```lua
+-- In your LazyVim plugins config
+{
+  "folke/snacks.nvim",
+  opts = {
+    lazygit = {
+      configure = false,  -- Disable snacks lazygit theme integration
+    },
+  },
+}
+```
+
+This ensures that lazygit uses your terminal's colors instead of theme-generated colors.
 
 ### Advanced Usage
 
